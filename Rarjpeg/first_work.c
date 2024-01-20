@@ -9,7 +9,6 @@ int main(void)
     char filename[512];
 
     FILE *file;
-    int bytes = 0;
     unsigned char jpeg_header[] = {0xFF, 0xD8};
     unsigned char zip_magic_header[] = {0x50, 0x4B};
     unsigned char buffer[2];
