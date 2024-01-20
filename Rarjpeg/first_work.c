@@ -34,7 +34,6 @@ int main(void)
     for (int i = fileSize - 2 ; i >= 0 ; i -= 2){
         fseek(file, i, SEEK_SET);
         if (fread(buffer, 1, sizeof(buffer), file) == sizeof(buffer)){
-            printf("\n");
             if (buffer[0] == zip_magic_header[0] && buffer[1] == zip_magic_header[1]){
                 printf("В файле зашифрован ZIP архив\n");
                 break;
@@ -43,7 +42,6 @@ int main(void)
                 printf("В файле не зашифрован ZIP архив\n");
                 break;
             }
-            printf("\n");
         }
     }
     fclose(file);
