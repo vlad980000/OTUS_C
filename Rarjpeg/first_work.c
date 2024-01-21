@@ -64,7 +64,7 @@ int main(void)
                 printf("В файле зашифрован ZIP архив файлы внутри\n"); 
                 struct CentralDirectory cdRecord;
                 fread(&cdRecord,sizeof(struct CentralDirectory), 1, file );
-                fseek(file, i + sizeof(struct CentralDirectory), SEEK_SET);
+                fseek(file, sizeof(struct CentralDirectory), SEEK_SET);
                 char *fileName = (char *)malloc(cdRecord.fileNameLength + 1);
                 fread(fileName, 1, cdRecord.fileNameLength, file);
                 fileName[cdRecord.fileNameLength] = '\0';
