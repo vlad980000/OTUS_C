@@ -35,6 +35,10 @@ int main(void)
     unsigned char zip_magic_header_empty[] = {0x50, 0x4B ,0x05, 0x06};
     unsigned char zip_central_header[] = {0x50, 0x4B ,0x01, 0x02};
     unsigned char buffer[4];
+    unsigned int isZip = 0;
+
+    char** fileNames = NULL;
+    size_t fileNamesCount = 0;
 
     printf("Введите путь к файлу: ");
     fgets(filename, sizeof(filename), stdin);
@@ -56,40 +60,41 @@ int main(void)
     for (int i = fileSize - 2 ; i >= 0 ; i -= 2){
         fseek(file, i, SEEK_SET);
         if (fread(buffer, 1, sizeof(buffer), file) == sizeof(buffer)){
-            /*for (int j = 0; j < sizeof(buffer); ++j) {
-                printf("%02X", buffer[j]);
-            }*/
-            //printf("\n");
+            if(buffer[0] == zip_magic_header_empty[0] && buffer[1] == zip_magic_header_empty[1] && buffer[2] == zip_magic_header_empty[2] && buffer[3] == zip_magic_header_empty[3]){
+                isZip = 1;
+            }
             if (buffer[0] == zip_central_header[0] && buffer[1] == zip_central_header[1] && buffer[2] == zip_central_header[2] && buffer[3] == zip_central_header[3]) {
-                printf("В файле зашифрован ZIP архив файлы внутри\n"); 
+                fseek(file, i, SEEK_SET);
                 struct CentralDirectory cdRecord;
-                fread(&cdRecord,sizeof(struct CentralDirectory), 1, file );
-                fseek(file, sizeof(struct CentralDirectory), SEEK_SET);
+                fread(&cdRecord, sizeof( cdRecord), 1, file);
                 char *fileName = (char *)malloc(cdRecord.fileNameLength + 1);
                 fread(fileName, 1, cdRecord.fileNameLength, file);
                 fileName[cdRecord.fileNameLength] = '\0';
-                printf("Signature: %08X\n", cdRecord.signature);
-                printf("Version: %hu\n", cdRecord.version);
-                printf("Version Needed: %hu\n", cdRecord.versionNeeded);
-                printf("Flags: %hu\n", cdRecord.flags);
-                printf("Compression: %hu\n", cdRecord.compression);
-                printf("Modtime: %hu\n", cdRecord.modtime);
-                printf("MmodDate: %hu\n", cdRecord.MmodDate);
-                printf("CRC32: %08X\n", cdRecord.crc32);
-                printf("Compressed Size: %u\n", cdRecord.compressedSize);
-                printf("Uncompressed Size: %u\n", cdRecord.uncompressedSize);
-                printf("File Name Length: %hu\n", cdRecord.fileNameLength);
-                printf("Extra Field Length: %hu\n", cdRecord.extraFieldLength);
-                printf("File Comment Length: %hu\n", cdRecord.fileCommLength);
-                printf("Disk Start: %hu\n", cdRecord.diskStart);
-                printf("Internal File Attributes: %hu\n", cdRecord.internalFileAttributes);
-                printf("External File Attributes: %08X\n", cdRecord.externalFileAttributes);
-                printf("Offset of Local Header: %08X\n", cdRecord.offsetOfLocalHeader);
-                free(fileName);
+                fileNamesCount++;
+                fileNames = realloc(fileNames, fileNamesCount * sizeof(char*));
+                fileNames[fileNamesCount - 1] = fileName;
             }
-            //printf("\n");
         }
     }
+
+    if (fileNamesCount == 0 && isZip == 0){
+        printf("Зашифрованных файлов нет, это не ZIP архив");
+
+        free(fileNames);
+        fclose(file);
+
+        return 0;
+    }
+
+    printf("Это точно ZIP архив, если он не пустой то ниже появятся имена файлов:\n");
+    for (size_t i = 0; i < fileNamesCount; i++) {
+        printf("%s\n", fileNames[i]);
+    }
+
+    for (size_t i = 0; i < fileNamesCount; i++) {
+        free(fileNames[i]);
+    }
+    free(fileNames);
     fclose(file);
 
     return 0;
