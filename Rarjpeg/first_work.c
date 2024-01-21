@@ -79,16 +79,12 @@ int main(void)
 
     if (fileNamesCount == 0 && isZip == 0){
         printf("Зашифрованных файлов нет, это не ZIP архив");
-
-        free(fileNames);
-        fclose(file);
-
-        return 0;
     }
-
-    printf("Это точно ZIP архив, если он не пустой то ниже появятся имена файлов:\n");
-    for (size_t i = 0; i < fileNamesCount; i++) {
-        printf("%s\n", fileNames[i]);
+    else{
+        printf("Это точно ZIP архив, если он не пустой то ниже появятся имена файлов:\n");
+        for (size_t i = 0; i < fileNamesCount; i++) {
+            printf("%s\n", fileNames[i]);
+        }
     }
 
     for (size_t i = 0; i < fileNamesCount; i++) {
