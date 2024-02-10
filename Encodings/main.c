@@ -10,30 +10,6 @@ struct decode_to_utf8 {
     unsigned char utf8_byte_2;
 };
 
-void fill_dict_to_iso88595(struct decode_to_utf8 *dict){
-    int i;
-    unsigned char iso_start = 0xB0;
-    unsigned char utf8_start_byte1 = 0xD0;
-    unsigned char utf8_start_byte2 = 0x90;
-
-    for(i = 0; i < 64;  i++){
-        dict[i].char_to_decode = iso_start + i;
-        unsigned char utf8_combined; 
-
-        utf8_combined = (utf8_start_byte1 << 8) | utf8_start_byte2;
-
-        utf8_combined += i;
-
-        dict[i].utf8_byte_1 = (utf8_combined >> 8) & 0xFF;
-        dict[i].utf8_byte_2 = utf8_combined & 0xFF;
-        
-    }
-
-    dict[65].char_to_decode = 0xA1; dict[65].utf8_byte_1 = 0xD0; dict[65].utf8_byte_2 = 0x81;
-    dict[66].char_to_decode = 0xF1; dict[66].utf8_byte_1 = 0xD1; dict[66].utf8_byte_2 = 0x91;
-
-}
-
 void fill_dict(struct decode_to_utf8 *dict, 
                         unsigned char cp1251_start,
                         unsigned char utf8_start_byte1,
