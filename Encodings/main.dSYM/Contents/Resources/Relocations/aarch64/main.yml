@@ -2,7 +2,10 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/vladcernysev/OTUS_C/Encodings/main'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _convert_CP1251_to_UTF8, symObjAddr: 0x0, symBinAddr: 0x100003AC4, symSize: 0xF8 }
-  - { offsetInCU: 0x4E, offset: 0x4E, size: 0x8, addend: 0x0, symName: _convert_CP1251_to_UTF8, symObjAddr: 0x0, symBinAddr: 0x100003AC4, symSize: 0xF8 }
-  - { offsetInCU: 0xAA, offset: 0xAA, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0xF8, symBinAddr: 0x100003BBC, symSize: 0x28C }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _fill_dict_to_iso88595, symObjAddr: 0x0, symBinAddr: 0x100002E5C, symSize: 0x118 }
+  - { offsetInCU: 0x4E, offset: 0x4E, size: 0x8, addend: 0x0, symName: _fill_dict_to_iso88595, symObjAddr: 0x0, symBinAddr: 0x100002E5C, symSize: 0x118 }
+  - { offsetInCU: 0xC6, offset: 0xC6, size: 0x8, addend: 0x0, symName: _fill_dict, symObjAddr: 0x118, symBinAddr: 0x100002F74, symSize: 0x1A0 }
+  - { offsetInCU: 0x13E, offset: 0x13E, size: 0x8, addend: 0x0, symName: _fill_dict_to_KOI8_R, symObjAddr: 0x2B8, symBinAddr: 0x100003114, symSize: 0x58C }
+  - { offsetInCU: 0x18C, offset: 0x18C, size: 0x8, addend: 0x0, symName: _convert_CP1251_to_UTF8, symObjAddr: 0x844, symBinAddr: 0x1000036A0, symSize: 0x15C }
+  - { offsetInCU: 0x212, offset: 0x212, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x9A0, symBinAddr: 0x1000037FC, symSize: 0x4A8 }
 ...
