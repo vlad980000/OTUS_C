@@ -1,0 +1,13 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/vladcernysev/OTUS_C/Hashtable/main'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _add_item, symObjAddr: 0x0, symBinAddr: 0x1000036AC, symSize: 0x74 }
+  - { offsetInCU: 0x42, offset: 0x42, size: 0x8, addend: 0x0, symName: _add_item, symObjAddr: 0x0, symBinAddr: 0x1000036AC, symSize: 0x74 }
+  - { offsetInCU: 0x82, offset: 0x82, size: 0x8, addend: 0x0, symName: _check_collusion, symObjAddr: 0x74, symBinAddr: 0x100003720, symSize: 0x70 }
+  - { offsetInCU: 0xB8, offset: 0xB8, size: 0x8, addend: 0x0, symName: _print_table, symObjAddr: 0xE4, symBinAddr: 0x100003790, symSize: 0x11C }
+  - { offsetInCU: 0xF8, offset: 0xF8, size: 0x8, addend: 0x0, symName: _rehash_fuction, symObjAddr: 0x200, symBinAddr: 0x1000038AC, symSize: 0x17C }
+  - { offsetInCU: 0x154, offset: 0x154, size: 0x8, addend: 0x0, symName: _check_item, symObjAddr: 0x37C, symBinAddr: 0x100003A28, symSize: 0x94 }
+  - { offsetInCU: 0x198, offset: 0x198, size: 0x8, addend: 0x0, symName: _hash_function, symObjAddr: 0x410, symBinAddr: 0x100003ABC, symSize: 0x154 }
+  - { offsetInCU: 0x1F4, offset: 0x1F4, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x564, symBinAddr: 0x100003C10, symSize: 0x208 }
+...
